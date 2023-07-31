@@ -5,6 +5,10 @@ import com.example.event_management.exception.ValidationException;
 import com.example.event_management.model.Events;
 import com.example.event_management.repository.EventsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,9 +23,16 @@ public class EventsService {
     @Autowired
     private UserEventService userEventService;
 
-
     public List<Events>  findAll() {
         return eventsRepository.findAll();
+    }
+
+    public List<Events>  findEventsWithPagination(int pageNumber, int limit, String sortBy) {
+        Sort sort = Sort.by(Sort.Direction.ASC, sortBy);
+
+        Page<Events> page = eventsRepository.findAll(PageRequest.of(pageNumber, limit, sort));
+
+        return page.getContent();
     }
 
     public Events getById(String id) {

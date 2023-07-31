@@ -1,5 +1,4 @@
 package com.example.event_management.exception;
-
 import org.springframework.web.bind.annotation.ResponseStatus;
 import static org.springframework.http.HttpStatus.LENGTH_REQUIRED;
 

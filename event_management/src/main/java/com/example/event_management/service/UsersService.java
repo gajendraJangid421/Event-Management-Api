@@ -7,6 +7,9 @@ import com.example.event_management.model.ResetPasswordRequest;
 import com.example.event_management.repository.UsersRepository;
 import com.example.event_management.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,14 +24,20 @@ public class UsersService {
     @Autowired
     private UserEventService userEventService;
 
-    static List<Users> usersList = new ArrayList<>();
-
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     boolean isPasswordCorrect = false;
 
     public List<Users> findAll() {
         return usersRepository.findAll();
+    }
+
+    public List<Users>  findUsersWithPagination(int pageNumber, int limit, String sortBy) {
+        Sort sort = Sort.by(Sort.Direction.ASC, sortBy);
+
+        Page<Users> page = usersRepository.findAll(PageRequest.of(pageNumber, limit, sort));
+
+        return page.getContent();
     }
 
     public Users getById(String id) {

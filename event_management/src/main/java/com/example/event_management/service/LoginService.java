@@ -4,7 +4,6 @@ import com.example.event_management.exception.UnAuthorisedException;
 import com.example.event_management.model.LoginResponse;
 import com.example.event_management.repository.UsersRepository;
 import com.example.event_management.model.LoginRequest;
-import com.example.event_management.model.Session;
 import com.example.event_management.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

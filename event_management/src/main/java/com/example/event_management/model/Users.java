@@ -1,5 +1,6 @@
 package com.example.event_management.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -24,6 +25,7 @@ public class Users {
     private String username;
 
     @Column(name = "password")
+    @JsonIgnore
     @NotBlank(message = "'password' should not be null or blank")
     @Size(min = 8)
     private String password;
